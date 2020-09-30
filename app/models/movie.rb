@@ -15,4 +15,5 @@ class Movie < ActiveRecord::Base
         'R' => 'R'}
     end
     
+    
 end

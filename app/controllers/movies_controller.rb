@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
 
-def show
+  def show
     id = params[:id] # retrieve movie ID from URI route
     @movie = Movie.find(id) # look up movie by unique ID
     # will render app/views/movies/show.<extension> by default
@@ -9,9 +9,9 @@ def show
   def index
       
       @all_ratings = Movie.all_ratings
-      @selected_ratings = params[:ratings] || Movie.all_ratings_as_hash
-      
-      sort = params[:sort]
+      @selected_ratings = params[:ratings] || session[:ratings]|| Movie.all_ratings_as_hash 
+       
+      sort = params[:sort] || session[:sort]
       if sort == 'by_title'
           @title_class = 'bg-warning hilite'
           @movies = Movie.with_ratings(@selected_ratings.keys).order(:title)
@@ -20,6 +20,12 @@ def show
           @movies = Movie.with_ratings(@selected_ratings.keys).order(:release_date)
       else
           @movies = Movie.with_ratings(@selected_ratings.keys)
+      end
+      session[:sort],session[:ratings] = sort, @selected_ratings
+      
+      if params[:sort] != session[:sort] or params[:ratings] != session[:ratings]
+          flash.keep
+          redirect_to movies_path sort: sort, ratings: @selected_ratings
       end
   end
 
