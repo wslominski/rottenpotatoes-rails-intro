@@ -22,6 +22,12 @@ gem 'themoviedb'
 gem 'tzinfo'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 
+group :test do
+    gem 'cucumber-rails', require: false
+    gem 'database_cleaner'
+    gem 'cucumber-rails-training-wheels'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -33,8 +39,10 @@ group :development, :test do
   gem 'sqlite3'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  #gem 'web-console', '~> 2.0'
 end
+
+gem 'web-console', group: :development
 
 group :production do
   gem 'pg', '~> 0.21' # for Heroku deployment

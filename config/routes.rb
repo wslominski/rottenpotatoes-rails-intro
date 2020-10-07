@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   #   resources :products
 
   resources :movies
+  post 'movies/search_tmdb' => 'movies#search_tmdb', as: 'search_tmdb'
   
   # Example resource route with options:
   #   resources :products do

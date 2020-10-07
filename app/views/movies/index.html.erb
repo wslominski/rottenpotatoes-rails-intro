@@ -6,7 +6,8 @@
   <% @all_ratings.each do |rating| %>
     <div class="form-check  form-check-inline">
       <%= label_tag "ratings[#{rating}]", rating, class: 'form-check-label' %>
-      <%= check_box_tag "ratings[#{rating}]", rating, @selected_ratings.include?(rating), class: 'form-check-input', id: "ratings_#{rating}" %>
+      <%= check_box_tag "ratings[#{rating}]", rating, @selected_ratings.include?(rating), class: 
+        'form-check-input', id: "ratings_#{rating}" %>
     </div>
   <% end %>
   <%= submit_tag 'Refresh', class: 'btn btn-primary', id: 'ratings_submit' %>
@@ -41,3 +42,10 @@
   </tbody>
 </table>
 <%= link_to 'Add new movie', new_movie_path, :class => 'btn btn-primary' %>
+
+<h1>Search TMDb for a movie</h1>
+<%= form_tag action: 'search_tmdb' do %>
+  <%= label_tag 'search_terms', 'Search Terms' %>
+  <%= text_field_tag 'search_terms' %>
+  <%= submit_tag "Search TMDb" %>
+<% end %>
